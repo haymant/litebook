@@ -122,6 +122,7 @@
 </template>
 
 <script>
+
 import dayjs from 'dayjs'
 import { mapActions } from 'vuex'
 import localeMixin from '@/locales/mixin.js'

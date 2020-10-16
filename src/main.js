@@ -12,6 +12,7 @@ import router from './router'
 import { menuHeader, menuAside } from '@/menu'
 import { frameInRoutes } from '@/router/routes'
 
+import '@/business'
 // 核心插件
 Vue.use(d2Admin)
 

@@ -2,7 +2,7 @@
   "name": "d2-admin",
   "version": "1.20.1",
   "scripts": {
-    "serve": "vue-cli-service serve --open",
+    "serve": "vue-cli-service serve --open --port 3000",
     "start": "npm run serve",
     "dev": "npm run serve",
     "build": "vue-cli-service build",
@@ -15,6 +15,9 @@
     "axios-mock-adapter": "^1.18.1",
     "better-scroll": "^1.15.2",
     "core-js": "^3.4.3",
+    "d2-crud-plus": "^1.16.7",
+    "d2-crud-x": "^2.10.5",
+    "d2p-extends": "^1.9.17",
     "dayjs": "^1.8.17",
     "element-ui": "^2.13.1",
     "faker": "^4.1.0",
