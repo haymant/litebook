@@ -1,12 +1,12 @@
 <template>
   <d2-container>
-    <template slot="header">Page 1 header</template>
-    Hello World
+    <template slot="header">Strategy</template>
+
   </d2-container>
 </template>
 
 <script>
 export default {
-  name: 'page1'
+  name: 'strategy'
 }
 </script>

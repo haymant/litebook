@@ -16,27 +16,27 @@ function supplementPath (menu) {
 }
 
 export const menuHeader = supplementPath([
-  { path: '/index', title: '首页', icon: 'home' },
+  { path: '/index', title: 'Dashboard', icon: 'home' },
   {
-    title: '页面',
+    title: 'Page',
     icon: 'folder-o',
     children: [
-      { path: '/page1', title: '页面 1' },
-      { path: '/page2', title: '页面 2' },
-      { path: '/page3', title: '页面 3' }
+      { path: '/marketdatapage', title: 'Market Data' },
+      { path: '/dataflow', title: 'Dataflow' },
+      { path: '/strategy', title: 'Strategy' }
     ]
   }
 ])
 
 export const menuAside = supplementPath([
-  { path: '/index', title: '首页', icon: 'home' },
+  { path: '/index', title: 'Dashboard', icon: 'home' },
   {
-    title: '页面',
+    title: 'Page',
     icon: 'folder-o',
     children: [
-      { path: '/page1', title: '页面 1' },
-      { path: '/page2', title: '页面 2' },
-      { path: '/page3', title: '页面 3' }
+      { path: '/marketdatapage', title: 'Market Data' },
+      { path: '/dataflow', title: 'Dataflow' },
+      { path: '/strategy', title: 'Strategy' }
     ]
   }
 ])

@@ -12,49 +12,50 @@ const frameIn = [
     redirect: { name: 'index' },
     component: layoutHeaderAside,
     children: [
-      // 首页
+      // Dashboard
       {
         path: 'index',
         name: 'index',
         meta: {
+          title: 'Dashboard',
           auth: true
         },
         component: _import('system/index')
       },
-      // 演示页面
+      // Page
       {
-        path: 'page1',
-        name: 'page1',
+        path: 'marketdatapage',
+        name: 'marketdatapage',
         meta: {
-          title: '页面 1',
+          title: 'Market Data',
           auth: true
         },
-        component: _import('demo/page1')
+        component: _import('page/marketdatapage')
       },
       {
-        path: 'page2',
-        name: 'page2',
+        path: 'dataflow',
+        name: 'dataflow',
         meta: {
-          title: '页面 2',
+          title: 'Dataflow',
           auth: true
         },
-        component: _import('demo/page2')
+        component: _import('page/dataflow')
       },
       {
-        path: 'page3',
-        name: 'page3',
+        path: 'strategy',
+        name: 'strategy',
         meta: {
-          title: '页面 3',
+          title: 'Strategy',
           auth: true
         },
-        component: _import('demo/page3')
+        component: _import('page/strategy')
       },
       // 系统 前端日志
       {
         path: 'log',
         name: 'log',
         meta: {
-          title: '前端日志',
+          title: 'Frontend Log',
           auth: true
         },
         component: _import('system/log')
