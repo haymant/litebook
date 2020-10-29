@@ -1,31 +1,25 @@
-import { find, assign } from 'lodash'
+import { LoginRequest } from '@/proto/rpc_base_pb'
 
-const users = [
-  { username: 'admin', password: 'admin', uuid: 'admin-uuid', name: 'Admin' },
-  { username: 'editor', password: 'editor', uuid: 'editor-uuid', name: 'Editor' },
-  { username: 'user1', password: 'user1', uuid: 'user1-uuid', name: 'User1' }
-]
-
-export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({
+export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools, marketDataService }) => ({
   /**
    * @description 登录
    * @param {Object} data 登录携带的信息
    */
   SYS_USER_LOGIN (data = {}) {
-    // 模拟数据
-    mock
-      .onAny('/login')
-      .reply(config => {
-        const user = find(users, tools.parse(config.data))
-        return user
-          ? tools.responseSuccess(assign({}, user, { token: faker.random.uuid() }))
-          : tools.responseError({}, '账号或密码不正确')
+    const loginRequest = new LoginRequest()
+    loginRequest.setAppid('AdminRpcClient/4.0.2-SNAPSHOT')
+    loginRequest.setVersionid('4.0.2-SNAPSHOT')
+    loginRequest.setClientid('9325ad14-25f3-4a9a-98b1-0b15485286a5')
+    loginRequest.setUsername(data.username)
+    loginRequest.setPassword(data.password)
+    return new Promise((resolve, reject) => {
+      marketDataService.login(loginRequest, { }, (err, response) => {
+        if (err) {
+          return reject(err)
+        } else {
+          resolve(response)
+        }
       })
-    // 接口请求
-    return requestForMock({
-      url: '/login',
-      method: 'post',
-      data
     })
   }
 })

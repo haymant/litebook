@@ -1,11 +1,14 @@
 <template>
   <d2-container>
-    <template slot='header'>Market Data</template>
+    <template slot='header'>
+      Market Data
+      <el-button slot="header" class="d2-mb-5" size="small" type="primary" @click="addRow">Add Symbol</el-button>
+      <el-button slot="header" class="d2-mb-5" size="small" type="warning" @click="pageRequest">Refresh</el-button>
+    </template>
     <d2-crud-x ref='d2Crud'
     :pagination="null"
     v-bind="_crudProps"
     v-on="_crudListeners">
-      <el-button slot="header" class="d2-mb-5" size="small" type="primary" @click="addRow">Add</el-button>
     </d2-crud-x>
     <crud-footer ref="footer"
                      :current="crud.page.current"
@@ -20,6 +23,8 @@
 <script>
 import { crudOptions } from './crud'
 import { d2CrudPlus } from 'd2-crud-plus'
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'marketdatapage',
   mixins: [d2CrudPlus.crud],
@@ -29,12 +34,25 @@ export default {
   },
   created () {
   },
+  computed: {
+    ...mapState('d2admin/user', {
+      sessionId: state => state.info.sessionId,
+      marketdata: state => state.marketdata
+    })
+  },
   methods: {
+    ...mapActions('d2admin/marketdata', [
+      'postRequest',
+      'getSnapshot'
+    ]),
+    addRequest (data) {
+      return this.postRequest({ symbol: data.symbol, sessionId: this.sessionId })
+    },
     getCrudOptions () {
       return crudOptions
     },
     pageRequest (query) {
-      return Promise.resolve({ code: 0, msg: 'success', data: { records: [{ symbol: 'APPL' }] } })
+      return this.getSnapshot({ sessionId: this.sessionId });
     }
   }
 }
