@@ -52,7 +52,7 @@ export default {
       return crudOptions
     },
     pageRequest (query) {
-      return this.getSnapshot({ sessionId: this.sessionId });
+      return this.getSnapshot({ sessionId: this.sessionId })
     }
   }
 }

@@ -13,7 +13,7 @@ export default {
       sessionId = ''
     } = {}) {
       const res = await api.GET_MARKETDATA_SNAPSHOT({ sessionId })
-      return { code: 0, msg: 'success', data: { records: [res] } }
+      return { code: 0, msg: 'success', data: { records: [Object.assign({}, ...res)] } }
     }
   }
 }
