@@ -37,6 +37,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
         } else {
           if (response.getEventList().length < 1) {
             return resolve({
+              symbol: 'FE'
             })
           }
           const res = response.getEventList()[0].getTradeevent().getMarketdataevent()
@@ -56,16 +57,16 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
           return reject(err)
         } else {
           if (response.getEventList().length < 1) {
-            return resolve({
+            return resolve({              
             })
           }
           const res = response.getEventList()[0].getMarketstatevent()
           return resolve({
-            open: 0, // res.getOpen().getQty() / Math.pow(10, res.getOpen().getScale()),
-            close: 0, // res.getClose().getQty() / Math.pow(10, res.getClose().getScale()),
-            high: 0, // res.getHigh().getQty() / Math.pow(10, res.getHigh().getScale()),
-            low: 0, // res.getLow().getQty() / Math.pow(10, res.getLow().getScale())
-            lowSrc: res.getLowexchange()
+            open: res.getOpen().getQty() / Math.pow(10, res.getOpen().getScale()),
+            close: res.getClose().getQty() / Math.pow(10, res.getClose().getScale()),
+            high: res.getHigh().getQty() / Math.pow(10, res.getHigh().getScale()),
+            low: res.getLow().getQty() / Math.pow(10, res.getLow().getScale()),
+            volume: res.getVolume().getQty() / Math.pow(10, res.getVolume().getScale())
           })
         }
       })
@@ -86,7 +87,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
             bidpx: bid.getPrice().getQty() / Math.pow(10, bid.getPrice().getScale()),
             bidqty: bid.getSize().getQty() / Math.pow(10, bid.getSize().getScale()),
             offerpx: ask.getPrice().getQty() / Math.pow(10, ask.getPrice().getScale()),
-            offerqty: ask.getSize().getQty() / Math.pow(10, ask.getSize().getScale())
+            offerqty: ask.getSize().getQty() / Math.pow(10, ask.getSize().getScale())            
           })
         }
       })
