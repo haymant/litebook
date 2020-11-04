@@ -14,8 +14,8 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     })
     marketDataRequest.setRequest('requestid=' + rId + ':symbols=' + data.symbol + ':content=LATEST_TICK,MARKET_STAT,TOP_OF_BOOK:assetclass=EQUITY')
     return new Promise((resolve, reject) => {
-      marketDataService.request(marketDataRequest, { })
-      resolve({})
+      var stream = marketDataService.request(marketDataRequest, { })
+      resolve(stream)
     })
   },
   GET_MARKETDATA_SNAPSHOT (data) {

@@ -35,9 +35,9 @@ export default {
   created () {
   },
   computed: {
-    ...mapState('d2admin/user', {
-      sessionId: state => state.info.sessionId,
-      marketdata: state => state.marketdata
+    ...mapState('d2admin', {
+      sessionId: state => state.user.info.sessionId,
+      data: state => state.marketdata.data
     })
   },
   methods: {
@@ -52,7 +52,14 @@ export default {
       return crudOptions
     },
     pageRequest (query) {
-      return this.getSnapshot({ sessionId: this.sessionId })
+      return new Promise((resolve, reject) => {
+        const mkt = []
+        for (const [, value] of this.data) {
+          mkt.push(value)
+        }
+        console.log(mkt)
+        return resolve({ code: 0, msg: 'success', data: { records: mkt } })
+      })
     }
   }
 }
