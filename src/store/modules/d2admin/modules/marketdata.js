@@ -3,7 +3,8 @@ import api from '@/api'
 export default {
   namespaced: true,
   state: {
-    data: new Map() // { code: 0, msg: 'success',  data: { current: 0, size: 1, total: 1, records: [] } }
+    data: new Map(),
+    updateSwitch: false
   },
   actions: {
     async postRequest  ({ state, dispatch }, {
@@ -49,6 +50,7 @@ export default {
           }
           if (evt.marketstatevent !== undefined) {
             item = state.data.get(evt.marketstatevent.instrument.symbol)
+            symbol = evt.marketstatevent.instrument.symbol
             newInfo = {
               open: evt.marketstatevent.open.qty / Math.pow(10, evt.marketstatevent.open.scale),
               close: evt.marketstatevent.close.qty / Math.pow(10, evt.marketstatevent.close.scale),
@@ -59,6 +61,7 @@ export default {
           }
           item = item === undefined ? {} : item
           state.data.set(symbol, { ...item, ...newInfo })
+          state.updateSwitch = !state.updateSwitch
         })
         stream.on('status', function (status) {
           if (status.metadata) {

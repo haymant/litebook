@@ -37,8 +37,17 @@ export default {
   computed: {
     ...mapState('d2admin', {
       sessionId: state => state.user.info.sessionId,
-      data: state => state.marketdata.data
+      data: state => state.marketdata.data,
+      updateSwitch: state => state.marketdata.updateSwitch
     })
+  },
+  watch: {
+    updateSwitch: {
+      handler: function (to, from) {
+        this.doRefresh()
+      },
+      deep: true
+    }
   },
   methods: {
     ...mapActions('d2admin/marketdata', [
@@ -53,11 +62,11 @@ export default {
     },
     pageRequest (query) {
       return new Promise((resolve, reject) => {
+        debugger
         const mkt = []
         for (const [, value] of this.data) {
           mkt.push(value)
         }
-        console.log(mkt)
         return resolve({ code: 0, msg: 'success', data: { records: mkt } })
       })
     }
