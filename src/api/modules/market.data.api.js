@@ -12,7 +12,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
       var v = c === 'x' ? r : (r & 0x3 | 0x8)
       return v.toString(16)
     })
-    marketDataRequest.setRequest('requestid=' + rId + ':symbols=' + data.symbol + ':content=LATEST_TICK,MARKET_STAT,TOP_OF_BOOK:assetclass=EQUITY')
+    marketDataRequest.setRequest('requestid=' + rId + ':symbols=' + data.symbol + ':content=LATEST_TICK,MARKET_STAT,TOP_OF_BOOK:assetclass=EQUITY' + ':parameters=range\\=5d\\:types\\=QUOTE,CHART')
     return new Promise((resolve, reject) => {
       var stream = marketDataService.request(marketDataRequest, { })
       resolve(stream)
@@ -57,7 +57,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
           return reject(err)
         } else {
           if (response.getEventList().length < 1) {
-            return resolve({              
+            return resolve({
             })
           }
           const res = response.getEventList()[0].getMarketstatevent()
@@ -87,7 +87,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
             bidpx: bid.getPrice().getQty() / Math.pow(10, bid.getPrice().getScale()),
             bidqty: bid.getSize().getQty() / Math.pow(10, bid.getSize().getScale()),
             offerpx: ask.getPrice().getQty() / Math.pow(10, ask.getPrice().getScale()),
-            offerqty: ask.getSize().getQty() / Math.pow(10, ask.getSize().getScale())            
+            offerqty: ask.getSize().getQty() / Math.pow(10, ask.getSize().getScale())
           })
         }
       })
