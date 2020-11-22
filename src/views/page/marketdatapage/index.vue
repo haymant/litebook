@@ -55,7 +55,14 @@ export default {
       'getSnapshot'
     ]),
     ...mapActions('d2admin/trade', [
-      'getReports'
+      'getReports',
+      'getOrders',
+      'getPositionAsOf',
+      'getLatestExecutionReportForOrderChain',
+      'getAllPositionsAsOf',
+      'getAllPositionsByRootAsOf',
+      'getFills',
+      'getAverageFillPrices'
     ]),
     addRequest (data) {
       return this.postRequest({ symbol: data.symbol, sessionId: this.sessionId })
@@ -64,7 +71,7 @@ export default {
       return crudOptions
     },
     fetchReports () {
-      return this.getReports({ sessionId: this.sessionId })
+      return this.getAverageFillPrices({ sessionId: this.sessionId })
     },
     pageRequest (query) {
       return new Promise((resolve, reject) => {
