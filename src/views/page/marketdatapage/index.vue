@@ -3,7 +3,7 @@
     <template slot='header'>
       Market Data
       <el-button slot="header" class="d2-mb-5" size="small" type="primary" @click="addRow">Add Symbol</el-button>
-      <el-button slot="header" class="d2-mb-5" size="small" type="warning" @click="pageRequest">Refresh</el-button>
+      <el-button slot="header" class="d2-mb-5" size="small" type="warning" @click="fetchReports">Refresh</el-button>
     </template>
     <d2-crud-x ref='d2Crud'
     :pagination="null"
@@ -54,15 +54,20 @@ export default {
       'postRequest',
       'getSnapshot'
     ]),
+    ...mapActions('d2admin/trade', [
+      'getReports'
+    ]),
     addRequest (data) {
       return this.postRequest({ symbol: data.symbol, sessionId: this.sessionId })
     },
     getCrudOptions () {
       return crudOptions
     },
+    fetchReports () {
+      return this.getReports({ sessionId: this.sessionId })
+    },
     pageRequest (query) {
       return new Promise((resolve, reject) => {
-        debugger
         const mkt = []
         for (const [, value] of this.data) {
           mkt.push(value)

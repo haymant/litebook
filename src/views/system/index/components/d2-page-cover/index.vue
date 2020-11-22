@@ -35,6 +35,7 @@ export default {
   data () {
     return {
       layout: dashboardOptions.layout,
+      // to listen window resizing and move to component
       height: window.innerHeight / 4 - 80,
       width: window.innerWidth / 4 - 80,
       chart: {

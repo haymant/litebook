@@ -1,6 +1,6 @@
 import { LoginRequest } from '@/proto/rpc_base_pb'
 
-export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools, marketDataService }) => ({
+export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools, marketDataService, tradeService }) => ({
   /**
    * @description 登录
    * @param {Object} data 登录携带的信息
@@ -13,7 +13,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     loginRequest.setUsername(data.username)
     loginRequest.setPassword(data.password)
     return new Promise((resolve, reject) => {
-      marketDataService.login(loginRequest, { }, (err, response) => {
+      tradeService.login(loginRequest, { }, (err, response) => {
         if (err) {
           return reject(err)
         } else {
