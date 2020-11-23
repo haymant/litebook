@@ -15,7 +15,7 @@
     </el-tooltip>
     <el-dialog
       title="Place Order"
-      width="600px"
+      width="=800px"
       :visible.sync="dialogVisible"
       :append-to-body="true">
       <d2-order-form/>
