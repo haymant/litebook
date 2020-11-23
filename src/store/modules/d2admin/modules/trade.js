@@ -45,6 +45,11 @@ export default {
       sessionId = ''
     } = {}) {
       await api.GET_OPEN_ORDERS({ sessionId })
+    },
+    async placeOrder  ({ state, dispatch }, {
+      sessionId = ''
+    } = {}) {
+      await api.PLACE_ORDER({ sessionId })
     }
   }
 }

@@ -6,10 +6,12 @@ import {
   GetAllPositionsAsOfRequest,
   GetAllPositionsByRootAsOfRequest,
   GetFillsRequest,
-  GetAverageFillPricesRequest
+  GetAverageFillPricesRequest,
+  SendOrderRequest
 } from '@/proto/rpc_trade_pb'
-import { SecurityType, Instrument } from '@/proto/rpc_trade_types_pb'
+import { SecurityType, Instrument, Order, OrderBase, Side, OrderType } from '@/proto/rpc_trade_types_pb'
 import { PageRequest } from '@/proto/rpc_paging_pb'
+import { Qty } from '@/proto/rpc_base_pb'
 
 var timestampPb = require('google-protobuf/google/protobuf/timestamp_pb.js')
 
@@ -117,6 +119,32 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     page.setSize(10)
     getAverageFillPricesRequest.setPagerequest(page)
     return tradeService.getAverageFillPrices(getAverageFillPricesRequest, { }, (err, response) => {
+      if (err) {
+        console.log(err)
+      }
+    })
+  },
+  PLACE_ORDER (data = {}) {
+    const sendOrderRequest = new SendOrderRequest()
+    sendOrderRequest.setSessionid(data.sessionId)
+    var order = new Order()
+    var orderB = new OrderBase()
+    var instrument = new Instrument()
+    instrument.setSymbol('FB')
+    instrument.setSecuritytype(SecurityType.COMMONSTOCK)
+    orderB.setInstrument(instrument)
+    orderB.setOrderid('1111')
+    var qty = new Qty()
+    qty.setQty(100)
+    orderB.setQuantity(qty)
+    var px = new Qty()
+    px.setQty(100)
+    orderB.setPrice(px)
+    orderB.setSide(Side.BUY)
+    orderB.setOrdertype(OrderType.LIMIT)
+    order.setOrderbase(orderB)
+    sendOrderRequest.setOrderList([order])
+    return tradeService.sendOrders(sendOrderRequest, { }, (err, response) => {
       if (err) {
         console.log(err)
       }

@@ -62,7 +62,8 @@ export default {
       'getAllPositionsAsOf',
       'getAllPositionsByRootAsOf',
       'getFills',
-      'getAverageFillPrices'
+      'getAverageFillPrices',
+      'placeOrder'
     ]),
     addRequest (data) {
       return this.postRequest({ symbol: data.symbol, sessionId: this.sessionId })
@@ -71,7 +72,7 @@ export default {
       return crudOptions
     },
     fetchReports () {
-      return this.getAverageFillPrices({ sessionId: this.sessionId })
+      return this.placeOrder({ sessionId: this.sessionId })
     },
     pageRequest (query) {
       return new Promise((resolve, reject) => {

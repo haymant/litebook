@@ -19,13 +19,15 @@
       :visible.sync="dialogVisible"
       :append-to-body="true">
       <d2-order-form/>
-      <el-button round>Submit</el-button>
+      <el-button round @click="placeOrder">Submit</el-button>
     </el-dialog>
   </div>
 </template>
 
 <script>
 import orderForm from '../panel-order'
+import { mapActions } from 'vuex'
+
 export default {
   components: {
     'd2-order-form': orderForm
@@ -33,6 +35,14 @@ export default {
   data () {
     return {
       dialogVisible: false
+    }
+  },
+  methods: {
+    ...mapActions('d2admin/trade', [
+      'placeOrder'
+    ]),
+    placeOrder () {
+      return this.placeOrder({ sessionId: this.sessionId })
     }
   }
 }
