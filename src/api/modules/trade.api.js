@@ -23,10 +23,14 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     page.setPage(0)
     page.setSize(10)
     getReportsRequest.setPagerequest(page)
-    return tradeService.getReports(getReportsRequest, { }, (err, response) => {
-      if (err) {
-        console.log(err)
-      }
+    return new Promise((resolve, reject) => {
+      tradeService.getReports(getReportsRequest, { }, (err, response) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(response)
+        }
+      })
     })
   },
   GET_OPEN_ORDERS (data = {}) {
@@ -36,10 +40,14 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     page.setPage(0)
     page.setSize(10)
     openOrdersRequest.setPagerequest(page)
-    return tradeService.getOpenOrders(openOrdersRequest, { }, (err, response) => {
-      if (err) {
-        console.log(err)
-      }
+    return new Promise((resolve, reject) => {
+      tradeService.getOpenOrders(openOrdersRequest, { }, (err, response) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(response)
+        }
+      })
     })
   },
   GET_POSITION_OF (data = {}) {

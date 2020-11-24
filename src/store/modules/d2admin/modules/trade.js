@@ -3,7 +3,7 @@ import api from '@/api'
 export default {
   namespaced: true,
   state: {
-    data: {}
+    orders: {}
   },
   actions: {
     async getReports  ({ state, dispatch }, {
@@ -44,7 +44,21 @@ export default {
     async getOrders  ({ state, dispatch }, {
       sessionId = ''
     } = {}) {
-      await api.GET_OPEN_ORDERS({ sessionId })
+      const ords = await api.GET_OPEN_ORDERS({ sessionId })
+      const list = ords.getOrdersList()
+      if (list === undefined) {
+        return { code: 1, msg: 'failure', data: {} }
+      }
+      var ordA = []
+      list.forEach(ord => {
+        ordA.push({
+          ordId: ord.getOrderid(),
+          broker: ord.getBrokerid(),
+          px: ord.getOrderprice().getQty() / Math.pow(10, ord.getOrderprice().getScale()),
+          qty: ord.getOrderquantity().getQty() / Math.pow(10, ord.getOrderquantity().getScale())
+        })
+      })
+      return { code: 0, msg: 'success', data: { records: ordA } }
     },
     async placeOrder  ({ state, dispatch }, {
       sessionId = ''

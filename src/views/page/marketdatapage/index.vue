@@ -72,7 +72,7 @@ export default {
       return crudOptions
     },
     fetchReports () {
-      return this.placeOrder({ sessionId: this.sessionId })
+      return this.getOrders({ sessionId: this.sessionId })
     },
     pageRequest (query) {
       return new Promise((resolve, reject) => {

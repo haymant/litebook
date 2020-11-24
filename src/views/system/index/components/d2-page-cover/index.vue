@@ -16,6 +16,9 @@
           <template v-if="item.i === '3'">
             <d2-trading :data="chart" :height="height" :width="width"></d2-trading>
           </template>
+          <template v-if="item.i === '5'">
+            <proto-table :options="orderOptions" :getData="fetchOrders"></proto-table >
+          </template>
         </el-card>
       </d2-grid-item>
     </d2-grid-layout>
@@ -27,10 +30,14 @@ import Vue from 'vue'
 import { GridLayout, GridItem } from 'vue-grid-layout'
 import TradingVue from 'trading-vue-js'
 import { dashboardOptions } from './dashboard'
+import ProtoTable from '@/components/proto-table'
+import { orderOptions } from './crud'
+import { mapState, mapActions } from 'vuex'
 
 Vue.component('d2-grid-layout', GridLayout)
 Vue.component('d2-grid-item', GridItem)
 Vue.component('d2-trading', TradingVue)
+Vue.component('proto-table', ProtoTable)
 export default {
   data () {
     return {
@@ -38,6 +45,7 @@ export default {
       // to listen window resizing and move to component
       height: window.innerHeight / 4 - 80,
       width: window.innerWidth / 4 - 80,
+      orderOptions,
       chart: {
         ohlcv: [
           [1551128400000, 33, 37.1, 14, 14, 196],
@@ -49,11 +57,22 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState('d2admin', {
+      sessionId: state => state.user.info.sessionId
+    })
+  },
   mounted () {
     // 加载完成后显示提示
     this.showInfo()
   },
   methods: {
+    ...mapActions('d2admin/trade', [
+      'getOrders'
+    ]),
+    fetchOrders () {
+      return this.getOrders({ sessionId: this.sessionId })
+    },
     log (arg1 = 'log', ...logs) {
       if (logs.length === 0) {
         console.log(arg1)
