@@ -21,6 +21,7 @@ export const menuHeader = supplementPath([
     title: 'Page',
     icon: 'folder-o',
     children: [
+      { path: '/universe', title: 'Universe' },
       { path: '/marketdatapage', title: 'Market Data' },
       { path: '/dataflow', title: 'Dataflow' },
       { path: '/strategy', title: 'Strategy' }
@@ -34,6 +35,7 @@ export const menuAside = supplementPath([
     title: 'Page',
     icon: 'folder-o',
     children: [
+      { path: '/universe', title: 'Universe' },
       { path: '/marketdatapage', title: 'Market Data' },
       { path: '/dataflow', title: 'Dataflow' },
       { path: '/strategy', title: 'Strategy' }

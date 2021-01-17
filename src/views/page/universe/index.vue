@@ -12,11 +12,7 @@
         @resized="resizedHandler"
         @moved="movedHandler">
         <el-card shadow="never" class="page_card">
-          <el-tag size="mini" type="info" slot="header">{{item.title}}</el-tag>
-          <template v-if="item.i === '3'">
-            <d2-trading :data="chart" :height="height" :width="width"></d2-trading>
-          </template>
-          <template v-if="item.i === '5'">
+          <template v-if="item.i === '2'">
             <proto-table :options="orderOptions" :getData="fetchOrders"></proto-table >
           </template>
         </el-card>
@@ -38,7 +34,9 @@ Vue.component('d2-grid-layout', GridLayout)
 Vue.component('d2-grid-item', GridItem)
 Vue.component('d2-trading', TradingVue)
 Vue.component('proto-table', ProtoTable)
+
 export default {
+  name: 'universe',
   data () {
     return {
       layout: dashboardOptions.layout,
@@ -163,3 +161,4 @@ export default {
   }
 }
 </style>
+

@@ -24,6 +24,15 @@ const frameIn = [
       },
       // Page
       {
+        path: 'universe',
+        name: 'universe',
+        meta: {
+          title: 'Investment Universe',
+          auth: true
+        },
+        component: _import('page/universe')
+      },      
+      {
         path: 'marketdatapage',
         name: 'marketdatapage',
         meta: {

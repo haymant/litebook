@@ -1,3 +1,4 @@
+@import '~element-theme-dark/lib/index.css';
 // 主题名称
 $theme-name: 'chester';
 // 主题背景颜色
@@ -11,19 +12,19 @@ $theme-message-info-text-color: #222A34;
 $theme-message-info-border-color: #222A34;
 
 // container组件
-$theme-container-background-color: rgba(#FFF, 1);
-$theme-container-header-footer-background-color: #FFF;
+$theme-container-background-color: rgba(#2A2D2E, 1);
+$theme-container-header-footer-background-color: rgb(25, 15, 37);
 $theme-container-border-inner: 1px solid #CFD7E5;
 $theme-container-border-outer: 1px solid #2A2D2E;
 
 $theme-multiple-page-control-color: #CCCCCC;
-$theme-multiple-page-control-color-active: #242D38;
+$theme-multiple-page-control-color-active: #f86503;
 $theme-multiple-page-control-nav-prev-color: #CCCCCC;
 $theme-multiple-page-control-nav-next-color: #CCCCCC;
 $theme-multiple-page-control-border-color: #2A2D2E;
 $theme-multiple-page-control-border-color-active: #FFFFFF;
 $theme-multiple-page-control-background-color: #242D38;
-$theme-multiple-page-control-background-color-active: #FFFFFF;
+$theme-multiple-page-control-background-color-active: #242D38;
 
 // 顶栏和侧边栏中展开的菜单 hover 状态下
 $theme-menu-item-color-hover: #CCCCCC;
